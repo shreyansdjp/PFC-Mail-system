@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block style %}
+<style>
+    a {
+        color: black;
+    }
+
+    a:hover {
+        color: black;
+    }
+
+    li.active a {
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="sidebar">
+                <div class="d-flex justify-content-between">
+                    <span class="mt-2">
+                        <p>{{ name }}</p>
+                    </span>
+                    <a href="/logout" class="btn btn-danger mb-2">Logout</a>
+                </div>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/compose" target="_blank">Compose</a>
+                    </li>
+                    {% if box == 'inbox' %}
+                        <li class="list-group-item active">
+                            <a href="/mail">Inbox</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">
+                            <a href="/mail">Inbox</a>
+                        </li>
+                    {% endif %}
+                    {% if box == 'sent' %}
+                        <li class="list-group-item active">
+                            <a href="/sent">Sent Mail</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">
+                            <a href="/sent">Sent Mail</a>
+                        </li>
+                    {% endif %}
+                    {% if box == 'archives' %}
+                        <li class="list-group-item active">
+                            <a href="/archives">Archives</a>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">
+                            <a href="/archives">Archives</a>
+                        </li>
+                    {% endif %}
+                    <li class="list-group-item"><span class="fa fa-chevron-right"></span> Folders</li>
+                    <ul class="list-group" id="groups">
+                        {% if box == 'accounts' %}
+                            <li class="list-group-item active">
+                                <a href="/mail/accounts">Accounts</a>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <a href="/mail/accounts">Accounts</a>
+                            </li>
+                        {% endif %}
+                        {% if box == 'sales' %}
+                            <li class="list-group-item active">
+                                <a href="/mail/sales">Sales</a>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <a href="/mail/sales">Sales</a>
+                            </li>
+                        {% endif %}
+                        {% if box == 'hm' %}
+                            <li class="list-group-item active">
+                                <a href="/mail/hm">Higher Management</a>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <a href="/mail/hm">Higher Management</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9 pt-4">
+            <div class="row pt-4">
+                <div class="col">
+                    <h4>Actions</h4>
+                    <div class="btn-group">
+                        <button title="Mark as read" class="btn btn-warning">
+                            <span class="fa fa-envelope-o"></span>
+                        </button>
+                        <button title="Mark as unread" class="btn btn-info">
+                            <span class="fa fa-envelope-open-o"></span>
+                        </button>
+                        <button title="Delete" class="btn btn-danger">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                        <button title="archive" class="btn btn-dark">
+                            <span class="fa fa-archive"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="jumbotron">
+                <p>{{ mail }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

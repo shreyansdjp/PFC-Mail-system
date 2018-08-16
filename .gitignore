@@ -1,0 +1,8 @@
+venv
+attachments
+mysql.py
+requirement-pfc.txt
+sample.PNG
+used.txt
+__pycache__
+.idea/

@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% block style %}
+<style>
+    a {
+        color: black;
+    }
+
+    a:hover {
+        color: black;
+    }
+
+    li.active a {
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="sidebar">
+                <div class="d-flex justify-content-between">
+                    <span class="mt-2">
+                        <p>{{ name }}</p>
+                    </span>
+                    <a href="/logout" class="btn btn-danger mb-2">Logout</a>
+                </div>
+                <hr>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="/compose" target="_blank">Compose</a>
+                    </li>
+                    <li class="list-group-item active">
+                        <a href="/mail">Inbox</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/sent">Sent Mail</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/archives">Archives</a>
+                    </li>
+                    <li class="list-group-item"><span class="fa fa-chevron-right"></span> Folders</li>
+                    <ul class="list-group" id="groups">
+                        <li class="list-group-item">
+                            <a href="/mail/accounts">Accounts</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/mail/sales">Sales</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/mail/hm">Higher Management</a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9 pt-4">
+            <div class="row pt-4">
+                <div class="col">
+                    <h4>Actions</h4>
+                    <div class="btn-group">
+                        <button title="Mark as read" class="btn btn-warning">
+                            <span class="fa fa-envelope-o"></span>
+                        </button>
+                        <button title="Mark as unread" class="btn btn-info">
+                            <span class="fa fa-envelope-open-o"></span>
+                        </button>
+                        <button title="Delete" class="btn btn-danger">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                        <button title="archive" class="btn btn-dark">
+                            <span class="fa fa-archive"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>
+                            From
+                        </th>
+                        <th>
+                            Subject
+                        </th>
+                        <th>
+                            Message
+                        </th>
+                        <th>
+                            Send At
+                        </th>
+                    </tr>
+                </thead>
+                {% for mail in mails: %}
+                    {% if mail['is_read'] == 1: %}
+                        <tr class="table-secondary" data-id="{{ mail['mail_id'] }}" data-href="/mail/inbox/id/{{ mail['mail_id'] }}">
+                            <td>
+                                <input type="checkbox" name="selectMail">
+                            </td>
+                            <td>
+                                {{ mail['from'] }}
+                            </td>
+                            <td>
+                                {{ mail['subject'] }}
+                            </td>
+                            <td>
+                                {{ mail['message'][0:50] }}
+                            </td>
+                            <td>
+                                {{ mail['send_at'] }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr data-id="{{ mail['mail_id'] }}" data-href="/mail/inbox/id/{{ mail['mail_id'] }}">
+                            <td>
+                                <input type="checkbox" name="selectMail">
+                            </td>
+                            <td>
+                                {{ mail['from'] }}
+                            </td>
+                            <td>
+                                {{ mail['subject'] }}
+                            </td>
+                            <td>
+                                {{ mail['message'][0:50] }}
+                            </td>
+                            <td>
+                                {{ mail['send_at'] }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

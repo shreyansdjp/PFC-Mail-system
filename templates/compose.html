@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="row d-flex justify-content-center pt-4">
+    <div class="col-9">
+        <h4>Compose Mail</h4>
+        {% if message: %}
+            <div class="alert alert-{{ classes }} fade show alert-dismissible">
+                <strong>{{ message }}</strong>
+                <button class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <form novalidate action="/compose" method="POST" enctype="multipart/form-data">
+            <div class="form-group" id="email_field">
+                <label for="emails" class="col-form-label">Email</label>
+                <input type="text" class="form-control" name="email" id="emails" placeholder="Email" autofocus autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-success" id="addEmail">Add Email</button>
+            </div>
+            <div class="form-group">
+                <label for="subject" class="col-form-label">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label for="body" class="col-form-group">Message</label>
+                <textarea name="body" id="body" rows="10" class="form-control" data-gramm_editor="false" autocomplete="off"></textarea>
+            </div>
+            <div class="form-group row align-items-center">
+                <label for="tag" class="col-form-group col-sm-1 mt-2">Tag</label>
+                <input type="text" name="tag" class="form-control col-sm-4" id="tag" placeholder="Tag" required>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control-file" name="file" multiple>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Send Mail</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

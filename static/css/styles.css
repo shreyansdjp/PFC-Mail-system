@@ -1,0 +1,24 @@
+.container-fluid {
+    padding-left: 0;
+}
+
+#login {
+    box-shadow: 3px 3px 2px 2px #ddd;	
+    padding: 20px;
+    background: white;
+}
+
+#groups {
+	padding-left: 20px;
+}
+
+#sidebar {
+    padding: 20px;
+	height: 100vh;
+	background-color: #eee;
+}
+
+input[type="checkbox"] {
+    height: 1em;
+    width: 1em;
+}
